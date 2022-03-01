@@ -6,7 +6,7 @@
 #    By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 16:07:45 by dha               #+#    #+#              #
-#    Updated: 2022/03/01 19:44:21 by dha              ###   ########seoul.kr   #
+#    Updated: 2022/03/01 21:51:22 by dha              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ MINILIBX_DIR = ./minilibx_mms
 MINILIBX_NAME = mlx
 MINILIBX = libmlx.dylib
 
-SRCS = main.c
+SRCS = main.c \
+		map.c
 INCS = solong.h
 OBJ_DIR = ./obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
