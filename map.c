@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 21:24:07 by dha               #+#    #+#             */
-/*   Updated: 2022/03/02 19:10:38 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/02 19:29:58 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static void	check_char(t_map *map, char	c)
 	if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
 		ft_error_exit("Error\n Invalid map(must use specified char)");
 	if (c == 'E')
-		map->exit++;
+		map->cnt_exit++;
 	if (c == 'P')
-		map->start++;
+		map->cnt_start++;
 	if (c == 'C')
-		map->collectible++;
+		map->cnt_collectible++;
 }
 
 static void	check_map(t_map *map)
@@ -60,11 +60,11 @@ static void	check_map(t_map *map)
 		}
 		y++;
 	}
-	if (map->exit < 1)
+	if (map->cnt_exit < 1)
 		ft_error_exit("Error\n Invalid map(must have at lease 1 exit)");
-	if (map->start < 1)
+	if (map->cnt_start < 1)
 		ft_error_exit("Error\n Invalid map(must have at lease 1 start point)");
-	if (map->collectible < 1)
+	if (map->cnt_collectible < 1)
 		ft_error_exit("Error\n Invalid map(must have at lease 1 collectible)");
 }
 

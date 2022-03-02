@@ -6,7 +6,7 @@
 #    By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 16:07:45 by dha               #+#    #+#              #
-#    Updated: 2022/03/01 21:51:22 by dha              ###   ########seoul.kr   #
+#    Updated: 2022/03/02 19:49:16 by dha              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,10 @@ all : $(NAME)
 # bonus : $(BONUS)
 
 $(NAME) : $(LIBFT) $(MINILIBX) $(OBJS) $(INCS)
-	@$(CC) $(CFLAGS) $(OBJS) -L $(LIBFT_DIR) -l$(LIBFT_NAME) -L $(MINILIBX_DIR) -l$(MINILIBX_NAME) -framework OpenGL -framework Appkit -o $@
+	@$(CC) $(CFLAGS) $(OBJS) \
+		-L $(LIBFT_DIR) -l$(LIBFT_NAME) \
+		-L $(MINILIBX_DIR) -l$(MINILIBX_NAME) \
+		-framework OpenGL -framework Appkit -o $@
 	@printf "💡 Make $(NAME) Done\n"
 
 # $(BONUS) : $(LIBFT) $(BONUS_OBJS) $(BONUS_INCS)
@@ -64,7 +67,8 @@ $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I $(LIBFT_DIR) -c $< -o $@ -g
 
-.PHONY : all clean fclean wclean re rr $(LIBFT_NAME)_clean $(LIBFT_NAME)_fclean
+.PHONY : all clean fclean wclean re rr \
+	$(LIBFT_NAME)_clean $(LIBFT_NAME)_fclean
 
 $(LIBFT) :
 	@make -C $(LIBFT_DIR)
