@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:42:38 by dha               #+#    #+#             */
-/*   Updated: 2022/03/01 21:00:16 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/02 13:47:11 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ long		ft_atol(const char *str);
 int			ft_numlen(long long n);
 int			ft_isnum(const char *s);
 void		ft_error_exit(char *msg);
+size_t		ft_linelen(const char *s);
 
 #endif

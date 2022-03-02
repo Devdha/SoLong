@@ -6,7 +6,7 @@
 #    By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/26 20:59:53 by dha               #+#    #+#              #
-#    Updated: 2022/03/01 21:00:09 by dha              ###   ########seoul.kr   #
+#    Updated: 2022/03/02 13:47:19 by dha              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = ft_isascii.c ft_putchar_fd.c ft_strchr.c ft_strlen.c ft_substr.c ft_atoi.
 	ft_strlcpy.c ft_strtrim.c get_next_line.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 	ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
 	ft_lstdel_back.c ft_lstdel_front.c ft_lst_beforelast.c ft_atol.c ft_numlen.c ft_isnum.c \
-	ft_error_exit.c
+	ft_error_exit.c ft_linelen.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 OBJS = $(SRCS:.c=.o)

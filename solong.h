@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:03:50 by dha               #+#    #+#             */
-/*   Updated: 2022/03/01 21:50:35 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/02 16:21:08 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ typedef struct s_vars
 	void	*win;
 }				t_vars;
 
-char	**get_map(char *map_file);
+typedef struct s_map
+{
+	char	**map;
+	int		row;
+	int		column;
+	int		exit;
+	int		collectible;
+	int		start;
+}				t_map;
+
+t_map	get_map(char *map_file);
 
 #endif

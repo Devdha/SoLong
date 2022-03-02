@@ -6,25 +6,107 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 21:24:07 by dha               #+#    #+#             */
-/*   Updated: 2022/03/01 21:55:14 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/02 16:42:25 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-char	**get_map(char *map_file)
+static void	map_realloc(t_map *map, int pre_size, int new_size)
 {
-	char	**map;
+	char	**tmp;
+	int		i;
+
+	tmp = malloc(sizeof(char *) * new_size);
+	i = 0;
+	while (i <= pre_size && i <= new_size)
+	{
+		tmp[i] = map->map[i];
+		i++;
+	}
+	free(map->map);
+	map->map = tmp;
+	map->row = new_size;
+}
+
+static void	check_char(t_map *map, char	c)
+{
+	if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
+		ft_error_exit("Error\n Invalid map(must use specified char)");
+	if (c == 'E')
+		map->exit++;
+	if (c == 'P')
+		map->start++;
+	if (c == 'C')
+		map->collectible++;
+}
+
+static void	check_map(t_map *map)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	while (y < map->row)
+	{
+		x = 0;
+		while (x < map->column)
+		{
+			if (((y == 0 || y == map->row - 1) && map->map[y][x] != '1')
+				|| ((x == 0 || x == map->column - 1) && map->map[y][x] != '1'))
+				ft_error_exit("Error\n Invalid map(must be closed by walls)");
+			check_char(map, map->map[y][x]);
+			x++;
+		}
+		y++;
+	}
+	if (map->exit < 1)
+		ft_error_exit("Error\n Invalid map(must have at lease 1 exit)");
+	if (map->start < 1)
+		ft_error_exit("Error\n Invalid map(must have at lease 1 start point)");
+	if (map->collectible < 1)
+		ft_error_exit("Error\n Invalid map(must have at lease 1 collectible)");
+}
+
+static void	read_map(t_map *map, int fd)
+{
+	int	i;
+
+	map->map = malloc(sizeof(char *) * 8);
+	map->row = 8;
+	if (!(map->map))
+		ft_error_exit("Error\n Memory allocation failed");
+	map->map[0] = get_next_line(fd);
+	map->column = ft_strlen(map->map[0]) - 1;
+	map->map[0][map->column] = '\0';
+	i = 0;
+	while (map->map[i++])
+	{
+		if (i == map->row)
+			map_realloc(map, map->row, map->row * 2);
+		map->map[i] = get_next_line(fd);
+		if (map->map[i])
+		{
+			if (map->column != ft_strlen(map->map[i]) - 1)
+				ft_error_exit("Error\n Invalid map(must be rectangle)");
+			map->map[i][map->column] = '\0';
+		}
+	}
+	map_realloc(map, map->row, i - 1);
+	check_map(map);
+}
+
+t_map	get_map(char *map_file)
+{
+	t_map	map;
 	int		i;
 	int		fd;
 
+	ft_bzero(&map, sizeof(map));
 	fd = open(map_file, O_RDONLY);
 	if (fd < 2)
-		ft_error_exit("[Error] Failed to open map file");
-	map = malloc(sizeof(char *) * 8);
-	map[0] = get_next_line(fd);
-	i = 0;
-	while (map[i++])
-		map[i] = get_next_line(fd);
-	return map;
+		ft_error_exit("Error\n Failed to open map file");
+	read_map(&map, fd);
+	close(fd);
+	return (map);
 }

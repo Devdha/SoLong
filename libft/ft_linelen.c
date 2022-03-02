@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_linelen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 16:03:29 by dha               #+#    #+#             */
-/*   Updated: 2022/03/02 16:44:45 by dha              ###   ########seoul.kr  */
+/*   Created: 2021/11/10 01:02:18 by dha               #+#    #+#             */
+/*   Updated: 2022/03/02 13:46:53 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "solong.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_linelen(const char *s)
 {
-	t_map	map;
+	const char	*cp;
 
-	if (argc != 2 || ft_strncmp(".ber", ft_strrchr(argv[1], '.'), 5))
-		ft_error_exit("Error\n Wrong format(./so_long [MAP_FILE].ber)");
-	map = get_map(argv[1]);
+	cp = s;
+	while (*cp && *cp != '\n')
+		cp++;
+	return (cp - s);
 }
