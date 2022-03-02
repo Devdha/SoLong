@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 21:24:07 by dha               #+#    #+#             */
-/*   Updated: 2022/03/02 16:42:25 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/02 19:10:38 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static void	read_map(t_map *map, int fd)
 	if (!(map->map))
 		ft_error_exit("Error\n Memory allocation failed");
 	map->map[0] = get_next_line(fd);
+	if (!map->map[0])
+		ft_error_exit("Error\n Empty map");
 	map->column = ft_strlen(map->map[0]) - 1;
 	map->map[0][map->column] = '\0';
 	i = 0;
@@ -93,7 +95,6 @@ static void	read_map(t_map *map, int fd)
 		}
 	}
 	map_realloc(map, map->row, i - 1);
-	check_map(map);
 }
 
 t_map	get_map(char *map_file)
@@ -107,6 +108,7 @@ t_map	get_map(char *map_file)
 	if (fd < 2)
 		ft_error_exit("Error\n Failed to open map file");
 	read_map(&map, fd);
+	check_map(&map);
 	close(fd);
 	return (map);
 }
