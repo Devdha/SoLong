@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:03:50 by dha               #+#    #+#             */
-/*   Updated: 2022/03/03 21:28:35 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/03 23:25:18 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libft.h"
 
 # define SCR_COLOR 0xABCDEF
+# define GAME_BIT 64
 
 typedef struct s_coord
 {
@@ -52,14 +53,17 @@ typedef struct s_game
 	t_map	map;
 	int		width;
 	int		height;
+	int		movement;
 	t_data	scr;
 	t_data	wall;
 	t_data	exit;
 	t_data	collectible;
 	t_data	character;
+	t_coord	position;
 }				t_game;
 
 void	get_map(t_game *game, char *map_file);
 void	init_img(t_game *game);
+void	draw_map(t_game *game);
 
 #endif

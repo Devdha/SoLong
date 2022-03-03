@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 21:24:07 by dha               #+#    #+#             */
-/*   Updated: 2022/03/03 21:36:41 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/03 23:26:07 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ void	get_map(t_game *game, char *map_file)
 	check_map(&map);
 	close(fd);
 	game->map = map;
-	game->width = map.column * 64;
-	game->height = map.row * 64;
+	game->width = map.column * GAME_BIT;
+	game->height = map.row * GAME_BIT;
 }

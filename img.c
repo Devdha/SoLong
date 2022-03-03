@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:08:04 by dha               #+#    #+#             */
-/*   Updated: 2022/03/03 21:58:35 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/03 22:47:51 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	init_img(t_game	*game)
 					= SCR_COLOR;
 	}
 	game->wall.img = mlx_xpm_file_to_image(game->mlx, \
-			"wall.xpm", tmp.x, tmp.y);
+			"wall.xpm", &tmp.x, &tmp.y);
 	game->character.img = mlx_xpm_file_to_image(game->mlx, \
-			"character.xpm", tmp.x, tmp.y);
+			"character.xpm", &tmp.x, &tmp.y);
 	game->exit.img = mlx_xpm_file_to_image(game->mlx, \
-			"exit.xpm", tmp.x, tmp.y);
+			"exit.xpm", &tmp.x, &tmp.y);
 	game->collectible.img = mlx_xpm_file_to_image(game->mlx, \
-			"collectible.xpm", tmp.x, tmp.y);
+			"collectible.xpm", &tmp.x, &tmp.y);
 }
