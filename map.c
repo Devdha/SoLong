@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 21:24:07 by dha               #+#    #+#             */
-/*   Updated: 2022/03/02 19:29:58 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/03 21:36:41 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	read_map(t_map *map, int fd)
 	map_realloc(map, map->row, i - 1);
 }
 
-t_map	get_map(char *map_file)
+void	get_map(t_game *game, char *map_file)
 {
 	t_map	map;
 	int		i;
@@ -110,5 +110,7 @@ t_map	get_map(char *map_file)
 	read_map(&map, fd);
 	check_map(&map);
 	close(fd);
-	return (map);
+	game->map = map;
+	game->width = map.column * 64;
+	game->height = map.row * 64;
 }

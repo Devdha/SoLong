@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:03:50 by dha               #+#    #+#             */
-/*   Updated: 2022/03/02 19:35:52 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/03 21:28:35 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,22 @@
 # include <mlx.h>
 # include "libft.h"
 
+# define SCR_COLOR 0xABCDEF
+
+typedef struct s_coord
+{
+	int	x;
+	int	y;
+}				t_coord;
+
 typedef struct s_data
 {
 	void	*img;
-	void	*addr;
+	int		*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 }				t_data;
-
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*win;
-}				t_vars;
 
 typedef struct s_map
 {
@@ -43,6 +45,21 @@ typedef struct s_map
 	int		cnt_start;
 }				t_map;
 
-t_map	get_map(char *map_file);
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	t_map	map;
+	int		width;
+	int		height;
+	t_data	scr;
+	t_data	wall;
+	t_data	exit;
+	t_data	collectible;
+	t_data	character;
+}				t_game;
+
+void	get_map(t_game *game, char *map_file);
+void	init_img(t_game *game);
 
 #endif
