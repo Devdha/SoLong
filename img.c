@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:08:04 by dha               #+#    #+#             */
-/*   Updated: 2022/03/03 22:47:51 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/04 01:21:41 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,4 @@ void	init_img(t_game	*game)
 	game->collectible.img = mlx_xpm_file_to_image(game->mlx, \
 			"collectible.xpm", &tmp.x, &tmp.y);
 }
+
