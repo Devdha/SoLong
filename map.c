@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 21:24:07 by dha               #+#    #+#             */
-/*   Updated: 2022/03/03 23:26:07 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/04 00:39:59 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	check_char(t_map *map, char	c)
 		ft_error_exit("Error\n Invalid map(must use specified char)");
 	if (c == 'E')
 		map->cnt_exit++;
-	if (c == 'P')
+	else if (c == 'P')
 		map->cnt_start++;
-	if (c == 'C')
+	else if (c == 'C')
 		map->cnt_collectible++;
 }
 

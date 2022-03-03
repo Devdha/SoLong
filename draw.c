@@ -6,11 +6,32 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 22:56:36 by dha               #+#    #+#             */
-/*   Updated: 2022/03/03 23:55:21 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/04 00:40:52 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
+
+void	put_image_to_window(t_game *game, char c, t_coord coord)
+{
+	if (c == '1')
+		mlx_put_image_to_window(game->mlx, game->win, game->wall.img, \
+				coord.x * GAME_BIT, coord.y * GAME_BIT);
+	else if (c == 'C')
+		mlx_put_image_to_window(game->mlx, game->win, game-> \
+				collectible.img, coord.x * GAME_BIT, coord.y * GAME_BIT);
+	else if (c == 'E')
+		mlx_put_image_to_window(game->mlx, game->win, game->exit.img, \
+				coord.x * GAME_BIT, coord.y * GAME_BIT);
+	else if (c == 'P')
+	{
+		mlx_put_image_to_window(game->mlx, game->win, game-> \
+				character.img, coord.x * GAME_BIT, coord.y * GAME_BIT);
+		game->position.x = coord.x;
+		game->position.y = coord.y;
+		game->movement = 0;
+	}
+}
 
 void	draw_map(t_game *game)
 {
@@ -22,19 +43,6 @@ void	draw_map(t_game *game)
 	{
 		coord.x = -1;
 		while (++coord.x < game->map.column)
-		{
-			if (game->map.map[coord.y][coord.x] == '1')
-				mlx_put_image_to_window(game->mlx, game->win, game->wall.img, \
-						coord.x * GAME_BIT, coord.y * GAME_BIT);
-			else if (game->map.map[coord.y][coord.x] == 'C')
-				mlx_put_image_to_window(game->mlx, game->win, game-> \
-				collectible.img, coord.x * GAME_BIT, coord.y * GAME_BIT);
-			else if (game->map.map[coord.y][coord.x] == 'E')
-				mlx_put_image_to_window(game->mlx, game->win, game->exit.img, \
-						coord.x * GAME_BIT, coord.y * GAME_BIT);
-			else if (game->map.map[coord.y][coord.x] == 'P')
-				mlx_put_image_to_window(game->mlx, game->win, game-> \
-						character.img, coord.x * GAME_BIT, coord.y * GAME_BIT);
-		}
+			put_image_to_window(game, game->map.map[coord.y][coord.x], coord);
 	}
 }
