@@ -6,12 +6,12 @@
 #    By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 16:07:45 by dha               #+#    #+#              #
-#    Updated: 2022/03/04 16:13:19 by dha              ###   ########seoul.kr   #
+#    Updated: 2022/03/04 16:14:22 by dha              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -rf
 NAME = so_long

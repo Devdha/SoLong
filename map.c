@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 21:24:07 by dha               #+#    #+#             */
-/*   Updated: 2022/03/04 15:28:13 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/04 16:19:00 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	read_map(t_map *map, int fd)
 		map->map[i] = get_next_line(fd);
 		if (map->map[i])
 		{
-			if (map->column != ft_strlen(map->map[i]) - 1)
+			if (map->column != (int) ft_strlen(map->map[i]) - 1)
 				ft_error_exit("Error\n Invalid map(must be rectangle)");
 			map->map[i][map->column] = '\0';
 		}
@@ -100,7 +100,6 @@ static void	read_map(t_map *map, int fd)
 void	get_map(t_game *game, char *map_file)
 {
 	t_map	map;
-	int		i;
 	int		fd;
 
 	ft_bzero(&map, sizeof(map));
