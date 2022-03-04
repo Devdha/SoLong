@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:03:50 by dha               #+#    #+#             */
-/*   Updated: 2022/03/03 23:25:18 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/04 15:27:30 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 
 # define SCR_COLOR 0xABCDEF
 # define GAME_BIT 64
+# define ESC 53
+# define A 0
+# define S 1
+# define D 2
+# define W 13
 
 typedef struct s_coord
 {
@@ -51,9 +56,11 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	t_map	map;
+	int		init;
 	int		width;
 	int		height;
 	int		movement;
+	int		collected;
 	t_data	scr;
 	t_data	wall;
 	t_data	exit;
@@ -65,5 +72,7 @@ typedef struct s_game
 void	get_map(t_game *game, char *map_file);
 void	init_img(t_game *game);
 void	draw_map(t_game *game);
+void	move(int dir, t_game *game);
+void	end_game(t_game *game);
 
 #endif

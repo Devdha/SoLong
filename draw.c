@@ -6,13 +6,13 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 22:56:36 by dha               #+#    #+#             */
-/*   Updated: 2022/03/04 00:40:52 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/04 16:12:36 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-void	put_image_to_window(t_game *game, char c, t_coord coord)
+static void	put_image_to_window(t_game *game, char c, t_coord coord)
 {
 	if (c == '1')
 		mlx_put_image_to_window(game->mlx, game->win, game->wall.img, \
@@ -29,7 +29,12 @@ void	put_image_to_window(t_game *game, char c, t_coord coord)
 				character.img, coord.x * GAME_BIT, coord.y * GAME_BIT);
 		game->position.x = coord.x;
 		game->position.y = coord.y;
-		game->movement = 0;
+		if (!(game->init))
+		{
+			game->movement = 0;
+			game->collected = 0;
+			game->init++;
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 #    By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/01 16:07:45 by dha               #+#    #+#              #
-#    Updated: 2022/03/03 23:14:10 by dha              ###   ########seoul.kr   #
+#    Updated: 2022/03/04 16:13:19 by dha              ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,18 +27,13 @@ MINILIBX = libmlx.dylib
 SRCS = main.c \
 		map.c \
 		img.c \
-		draw.c
+		draw.c \
+		move.c
 INCS = solong.h
 OBJ_DIR = ./obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
-# BONUS_SRCS = 
-# BONUS_INCS = 
-# BONUS_OBJS = $(addprefix $(OBJ_DIR)/, $(BONUS_SRCS:.c=.o))
-
 all : $(NAME)
-
-# bonus : $(BONUS)
 
 $(NAME) : $(LIBFT) $(MINILIBX) $(OBJS) $(INCS)
 	@$(CC) $(CFLAGS) $(OBJS) \
@@ -46,10 +41,6 @@ $(NAME) : $(LIBFT) $(MINILIBX) $(OBJS) $(INCS)
 		-L $(MINILIBX_DIR) -l$(MINILIBX_NAME) \
 		-framework OpenGL -framework Appkit -o $@
 	@printf "💡 Make $(NAME) Done\n"
-
-# $(BONUS) : $(LIBFT) $(BONUS_OBJS) $(BONUS_INCS)
-# 	@$(CC) $(CFLAGS) -I ./ $(BONUS_OBJS) -L $(LIBFT_DIR) -l$(LIBFT_NAME) -o $@
-# 	@printf "💡 Make $(BONUS) Done\n"
 	
 clean :
 	@$(RM) $(OBJ_DIR)
@@ -59,7 +50,7 @@ fclean : clean
 	@$(RM) $(NAME)
 	@echo "🗑 Remove $(NAME) Done"
 
-wclean : fclean $(LIBFT_NAME)_fclean
+wclean : fclean $(LIBFT_NAME)_fclean $(MINILIBX)_fclean
 
 re : fclean all
 
@@ -70,7 +61,8 @@ $(OBJ_DIR)/%.o : %.c
 	@$(CC) $(CFLAGS) -I $(LIBFT_DIR) -c $< -o $@ -g
 
 .PHONY : all clean fclean wclean re rr \
-	$(LIBFT_NAME)_clean $(LIBFT_NAME)_fclean
+	$(LIBFT_NAME)_clean $(LIBFT_NAME)_fclean \
+	$(MINILIBX)_clean $(MINILIBX)_fclean
 
 $(LIBFT) :
 	@make -C $(LIBFT_DIR)
@@ -84,3 +76,12 @@ $(LIBFT_NAME)_fclean :
 $(MINILIBX) :
 	@make -sC $(MINILIBX_DIR)
 	@cp $(MINILIBX_DIR)/$(MINILIBX) .
+	@printf "💡 Make lib$(MINILIBX_NAME) Done\n"
+
+$(MINILIBX)_clean :
+	@echo "🗑 Remove $(MINILIBX)'s OBJs Done"
+	@make -sC $(MINILIBX_DIR) clean
+
+$(MINILIBX)_fclean : $(MINILIBX)_clean
+	@echo "🗑 Remove $(MINILIBX) Done"
+	@$(RM) $(MINILIBX)

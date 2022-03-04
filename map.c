@@ -6,7 +6,7 @@
 /*   By: dha <dha@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 21:24:07 by dha               #+#    #+#             */
-/*   Updated: 2022/03/04 00:39:59 by dha              ###   ########seoul.kr  */
+/*   Updated: 2022/03/04 15:28:13 by dha              ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void	check_map(t_map *map)
 	}
 	if (map->cnt_exit < 1)
 		ft_error_exit("Error\n Invalid map(must have at lease 1 exit)");
-	if (map->cnt_start < 1)
-		ft_error_exit("Error\n Invalid map(must have at lease 1 start point)");
+	if (map->cnt_start < 1 || map->cnt_start > 1)
+		ft_error_exit("Error\n Invalid map(must have just 1 start point)");
 	if (map->cnt_collectible < 1)
 		ft_error_exit("Error\n Invalid map(must have at lease 1 collectible)");
 }
@@ -110,6 +110,7 @@ void	get_map(t_game *game, char *map_file)
 	read_map(&map, fd);
 	check_map(&map);
 	close(fd);
+	game->init = 0;
 	game->map = map;
 	game->width = map.column * GAME_BIT;
 	game->height = map.row * GAME_BIT;
